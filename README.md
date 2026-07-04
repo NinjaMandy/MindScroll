@@ -6,7 +6,62 @@ The app uses Android's Accessibility Service to track swipes and new videos dyna
 
 ---
 
-## Architecture
+## Project Structure
+
+```
+mindscroll/
+├── .github/workflows/
+│   └── build_apk.yml            # CI/CD release build pipeline
+├── pubspec.yaml                 # Dependencies (Riverpod, Isar, fl_chart)
+├── lib/
+│   ├── main.dart                # Entry point, DB configuration, provider startup
+│   └── src/
+│       ├── core/
+│       │   ├── models/
+│       │   │   ├── daily_stats.dart   # Isar schema for daily counts
+│       │   │   └── unlock_record.dart # Isar schema for unlock auditing
+│       │   ├── storage/
+│       │   │   ├── state_manager.dart # JSON loader & DB syncing
+│       │   │   └── history_provider.dart # History stats calculator
+│       │   └── theme/
+│       │       └── app_theme.dart     # Material 3 light/dark style declarations
+│       └── features/
+│           ├── home/
+│           │   └── presentation/
+│           │       └── home_shell.dart # Main Navigation shell
+│           ├── dashboard/
+│           │   └── presentation/
+│           │       └── dashboard_screen.dart # Progress circle & platform breakdowns
+│           ├── analytics/
+│           │   └── presentation/
+│           │       └── analytics_screen.dart # fl_chart weekly & monthly bar charts
+│           └── settings/
+│               └── presentation/
+│                   └── settings_screen.dart # Configuration for limits & positions
+└── android/
+    ├── gradle.properties        # Project settings (AndroidX and Jetifier)
+    ├── build.gradle             # Modern Gradle build setup (Plugin DSL)
+    ├── settings.gradle          # Modern Gradle settings (Plugin DSL)
+    └── app/
+        ├── build.gradle         # App-level AGP target & settings
+        └── src/main/
+            ├── AndroidManifest.xml # Service registration & MainActivity bindings
+            ├── res/
+            │   ├── xml/
+            │   │   └── accessibility_service_config.xml # Events mapping
+            │   ├── values/
+            │   │   ├── strings.xml  # Accessibility labels
+            │   │   └── styles.xml   # App styles fallback
+            │   └── drawable/
+            │       └── launch_background.xml
+            └── kotlin/com/example/mindscroll/
+                ├── MainActivity.kt # Check/request Accessibility permissions channel
+                └── MindScrollAccessibilityService.kt # Foreground detection, signature parsing, blocking overlays
+```
+
+---
+
+## Project Architecture
 
 MindScroll implements a decoupled, battery-efficient sync architecture. The native accessibility tracker runs continuously in the background, writing event increments to a shared file, which the premium Flutter UI syncs to a local Isar database.
 
@@ -117,3 +172,28 @@ To function correctly, the application requires the following Android permission
    * Open the app.
    * Tap the **Enable in Settings** card on the dashboard.
    * Go to **Downloaded Services** > **MindScroll** > Toggle **On**.
+
+---
+
+## Generating the APK from GitHub Actions
+
+This repository includes a pre-configured GitHub Actions workflow in `.github/workflows/build_apk.yml` to compile the app without needing local Flutter installations.
+
+### Automatic Builds
+The build pipeline triggers automatically whenever you:
+1. **Push** a commit to your `main` or `master` branch.
+2. **Merge** a pull request into `main` or `master`.
+
+### Manual Builds (Workflow Dispatch)
+You can manually run the build via GitHub's web interface:
+1. Go to your repository page on GitHub.
+2. Select the **Actions** tab at the top.
+3. In the left-hand sidebar, select the **Build Release APK** workflow.
+4. Click the **Run workflow** dropdown on the right, select the branch (`main`), and click the green **Run workflow** button.
+
+### How to Download the Built APK
+1. Wait for the build workflow to finish running (typically takes 4-5 minutes).
+2. Click on the completed run (it will have a green checkmark).
+3. Scroll down to the **Artifacts** section at the bottom of the summary page.
+4. Click on `release-apk` to download the zip file containing the compiled `app-release.apk`.
+5. Unzip and install `app-release.apk` on your Android device!
