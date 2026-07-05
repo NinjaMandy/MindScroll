@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">MindScroll</string>
-    <string name="accessibility_service_description">MindScroll monitors short-form content scrolling on YouTube, Instagram, Facebook, and TikTok to help you track and manage your daily consumption limit.</string>
-</resources>
