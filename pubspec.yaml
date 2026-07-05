@@ -1,11 +1,11 @@
 name: mindscroll
-description: A digital wellbeing app to monitor and limit short-form content consumption.
-publish_to: "none"
+description: MindScroll - Offline digital wellbeing app to monitor short-form content consumption.
+publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ^3.12.2
 
 dependencies:
   flutter:
@@ -26,11 +26,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
   build_runner: ^2.4.13
   isar_generator: ^3.1.0+1
 
 flutter:
   uses-material-design: true
-
