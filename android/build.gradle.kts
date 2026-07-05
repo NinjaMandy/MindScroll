@@ -1,4 +1,3 @@
-import com.android.build.gradle.BaseExtension
 
 allprojects {
     repositories {
@@ -20,19 +19,7 @@ subprojects {
 
     evaluationDependsOn(":app")
 
-    afterEvaluate {
-
-        val android = extensions.findByName("android")
-
-        if (android is BaseExtension) {
-
-            if (android.namespace == null) {
-                android.namespace = project.group.toString().ifBlank {
-                    "dev.isar.${project.name}"
-                }
-            }
-        }
-    }
+  
 }
 
 tasks.register<Delete>("clean") {
