@@ -178,7 +178,7 @@ class MindScrollAccessibilityService : AccessibilityService() {
         
         // Filter out typical static buttons to avoid signature changes from layout clicks
         val filtered = texts.filter { 
-            val word = it.trim().toLowerCase()
+            val word = it.trim().lowercase()
             word != "share" && word != "comment" && word != "comments" && 
             word != "like" && word != "likes" && word != "dislike" && 
             word != "remix" && word != "reply"
