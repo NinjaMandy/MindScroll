@@ -17,11 +17,7 @@ const DailyStatsSchema = CollectionSchema(
   name: r'DailyStats',
   id: -7592871651347013517,
   properties: {
-    r'date': PropertySchema(
-      id: 0,
-      name: r'date',
-      type: IsarType.string,
-    ),
+    r'date': PropertySchema(id: 0, name: r'date', type: IsarType.string),
     r'estimatedViewingTimeSeconds': PropertySchema(
       id: 1,
       name: r'estimatedViewingTimeSeconds',
@@ -51,8 +47,9 @@ const DailyStatsSchema = CollectionSchema(
       id: 6,
       name: r'youtubeCount',
       type: IsarType.long,
-    )
+    ),
   },
+
   estimateSize: _dailyStatsEstimateSize,
   serialize: _dailyStatsSerialize,
   deserialize: _dailyStatsDeserialize,
@@ -69,16 +66,17 @@ const DailyStatsSchema = CollectionSchema(
           name: r'date',
           type: IndexType.hash,
           caseSensitive: true,
-        )
+        ),
       ],
-    )
+    ),
   },
   links: {},
   embeddedSchemas: {},
+
   getId: _dailyStatsGetId,
   getLinks: _dailyStatsGetLinks,
   attach: _dailyStatsAttach,
-  version: '3.1.0+1',
+  version: '3.3.2',
 );
 
 int _dailyStatsEstimateSize(
@@ -229,10 +227,7 @@ extension DailyStatsQueryWhere
     on QueryBuilder<DailyStats, DailyStats, QWhereClause> {
   QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
-      ));
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
     });
   }
 
@@ -258,8 +253,10 @@ extension DailyStatsQueryWhere
     });
   }
 
-  QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> idGreaterThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> idGreaterThan(
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -267,8 +264,10 @@ extension DailyStatsQueryWhere
     });
   }
 
-  QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> idLessThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> idLessThan(
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -283,56 +282,67 @@ extension DailyStatsQueryWhere
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
-        includeLower: includeLower,
-        upper: upperId,
-        includeUpper: includeUpper,
-      ));
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> dateEqualTo(
-      String date) {
+    String date,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'date',
-        value: [date],
-      ));
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'date', value: [date]),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterWhereClause> dateNotEqualTo(
-      String date) {
+    String date,
+  ) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'date',
-              lower: [],
-              upper: [date],
-              includeUpper: false,
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'date',
-              lower: [date],
-              includeLower: false,
-              upper: [],
-            ));
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'date',
+                lower: [],
+                upper: [date],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'date',
+                lower: [date],
+                includeLower: false,
+                upper: [],
+              ),
+            );
       } else {
         return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'date',
-              lower: [date],
-              includeLower: false,
-              upper: [],
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'date',
-              lower: [],
-              upper: [date],
-              includeUpper: false,
-            ));
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'date',
+                lower: [date],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'date',
+                lower: [],
+                upper: [date],
+                includeUpper: false,
+              ),
+            );
       }
     });
   }
@@ -345,11 +355,13 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -359,12 +371,14 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -374,12 +388,14 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -391,14 +407,16 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'date',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'date',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -407,11 +425,13 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -420,175 +440,182 @@ extension DailyStatsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> dateContains(
-      String value,
-      {bool caseSensitive = true}) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'date',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'date',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> dateMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'date',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'date',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> dateIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'date', value: ''),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> dateIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'date',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'date', value: ''),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      estimatedViewingTimeSecondsEqualTo(int value) {
+  estimatedViewingTimeSecondsEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'estimatedViewingTimeSeconds',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'estimatedViewingTimeSeconds',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      estimatedViewingTimeSecondsGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  estimatedViewingTimeSecondsGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'estimatedViewingTimeSeconds',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'estimatedViewingTimeSeconds',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      estimatedViewingTimeSecondsLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  estimatedViewingTimeSecondsLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'estimatedViewingTimeSeconds',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'estimatedViewingTimeSeconds',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      estimatedViewingTimeSecondsBetween(
+  estimatedViewingTimeSecondsBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'estimatedViewingTimeSeconds',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'estimatedViewingTimeSeconds',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      facebookCountEqualTo(int value) {
+  facebookCountEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'facebookCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'facebookCount', value: value),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      facebookCountGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  facebookCountGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'facebookCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'facebookCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      facebookCountLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  facebookCountLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'facebookCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'facebookCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      facebookCountBetween(
+  facebookCountBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'facebookCount',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'facebookCount',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> idEqualTo(
-      Id value) {
+    Id value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
     });
   }
 
@@ -597,11 +624,13 @@ extension DailyStatsQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -610,11 +639,13 @@ extension DailyStatsQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -625,163 +656,161 @@ extension DailyStatsQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      instagramCountEqualTo(int value) {
+  instagramCountEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'instagramCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'instagramCount', value: value),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      instagramCountGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  instagramCountGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'instagramCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'instagramCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      instagramCountLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  instagramCountLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'instagramCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'instagramCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      instagramCountBetween(
+  instagramCountBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'instagramCount',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'instagramCount',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      tiktokCountEqualTo(int value) {
+  tiktokCountEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tiktokCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'tiktokCount', value: value),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      tiktokCountGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  tiktokCountGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'tiktokCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'tiktokCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      tiktokCountLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  tiktokCountLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'tiktokCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'tiktokCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      tiktokCountBetween(
+  tiktokCountBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'tiktokCount',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'tiktokCount',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition> totalCountEqualTo(
-      int value) {
+    int value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'totalCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'totalCount', value: value),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      totalCountGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  totalCountGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'totalCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'totalCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      totalCountLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  totalCountLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'totalCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'totalCount',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -792,69 +821,70 @@ extension DailyStatsQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'totalCount',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'totalCount',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      youtubeCountEqualTo(int value) {
+  youtubeCountEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'youtubeCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'youtubeCount', value: value),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      youtubeCountGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  youtubeCountGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'youtubeCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'youtubeCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      youtubeCountLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  youtubeCountLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'youtubeCount',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'youtubeCount',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterFilterCondition>
-      youtubeCountBetween(
+  youtubeCountBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'youtubeCount',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'youtubeCount',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -880,14 +910,14 @@ extension DailyStatsQuerySortBy
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      sortByEstimatedViewingTimeSeconds() {
+  sortByEstimatedViewingTimeSeconds() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estimatedViewingTimeSeconds', Sort.asc);
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      sortByEstimatedViewingTimeSecondsDesc() {
+  sortByEstimatedViewingTimeSecondsDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estimatedViewingTimeSeconds', Sort.desc);
     });
@@ -912,7 +942,7 @@ extension DailyStatsQuerySortBy
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      sortByInstagramCountDesc() {
+  sortByInstagramCountDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'instagramCount', Sort.desc);
     });
@@ -970,14 +1000,14 @@ extension DailyStatsQuerySortThenBy
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      thenByEstimatedViewingTimeSeconds() {
+  thenByEstimatedViewingTimeSeconds() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estimatedViewingTimeSeconds', Sort.asc);
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      thenByEstimatedViewingTimeSecondsDesc() {
+  thenByEstimatedViewingTimeSecondsDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estimatedViewingTimeSeconds', Sort.desc);
     });
@@ -1014,7 +1044,7 @@ extension DailyStatsQuerySortThenBy
   }
 
   QueryBuilder<DailyStats, DailyStats, QAfterSortBy>
-      thenByInstagramCountDesc() {
+  thenByInstagramCountDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'instagramCount', Sort.desc);
     });
@@ -1059,15 +1089,16 @@ extension DailyStatsQuerySortThenBy
 
 extension DailyStatsQueryWhereDistinct
     on QueryBuilder<DailyStats, DailyStats, QDistinct> {
-  QueryBuilder<DailyStats, DailyStats, QDistinct> distinctByDate(
-      {bool caseSensitive = true}) {
+  QueryBuilder<DailyStats, DailyStats, QDistinct> distinctByDate({
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'date', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<DailyStats, DailyStats, QDistinct>
-      distinctByEstimatedViewingTimeSeconds() {
+  distinctByEstimatedViewingTimeSeconds() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'estimatedViewingTimeSeconds');
     });
@@ -1119,7 +1150,7 @@ extension DailyStatsQueryProperty
   }
 
   QueryBuilder<DailyStats, int, QQueryOperations>
-      estimatedViewingTimeSecondsProperty() {
+  estimatedViewingTimeSecondsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'estimatedViewingTimeSeconds');
     });

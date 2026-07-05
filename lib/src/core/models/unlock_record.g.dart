@@ -26,8 +26,9 @@ const UnlockRecordSchema = CollectionSchema(
       id: 1,
       name: r'timestamp',
       type: IsarType.long,
-    )
+    ),
   },
+
   estimateSize: _unlockRecordEstimateSize,
   serialize: _unlockRecordSerialize,
   deserialize: _unlockRecordDeserialize,
@@ -36,10 +37,11 @@ const UnlockRecordSchema = CollectionSchema(
   indexes: {},
   links: {},
   embeddedSchemas: {},
+
   getId: _unlockRecordGetId,
   getLinks: _unlockRecordGetLinks,
   attach: _unlockRecordAttach,
-  version: '3.1.0+1',
+  version: '3.3.2',
 );
 
 int _unlockRecordEstimateSize(
@@ -99,7 +101,10 @@ List<IsarLinkBase<dynamic>> _unlockRecordGetLinks(UnlockRecord object) {
 }
 
 void _unlockRecordAttach(
-    IsarCollection<dynamic> col, Id id, UnlockRecord object) {
+  IsarCollection<dynamic> col,
+  Id id,
+  UnlockRecord object,
+) {
   object.id = id;
 }
 
@@ -116,15 +121,13 @@ extension UnlockRecordQueryWhere
     on QueryBuilder<UnlockRecord, UnlockRecord, QWhereClause> {
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
-      ));
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterWhereClause> idNotEqualTo(
-      Id id) {
+    Id id,
+  ) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -147,8 +150,9 @@ extension UnlockRecordQueryWhere
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterWhereClause> idGreaterThan(
-      Id id,
-      {bool include = false}) {
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -156,8 +160,10 @@ extension UnlockRecordQueryWhere
     });
   }
 
-  QueryBuilder<UnlockRecord, UnlockRecord, QAfterWhereClause> idLessThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<UnlockRecord, UnlockRecord, QAfterWhereClause> idLessThan(
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -172,12 +178,14 @@ extension UnlockRecordQueryWhere
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
-        includeLower: includeLower,
-        upper: upperId,
-        includeUpper: includeUpper,
-      ));
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -185,68 +193,67 @@ extension UnlockRecordQueryWhere
 extension UnlockRecordQueryFilter
     on QueryBuilder<UnlockRecord, UnlockRecord, QFilterCondition> {
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      durationMinutesEqualTo(int value) {
+  durationMinutesEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'durationMinutes',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'durationMinutes', value: value),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      durationMinutesGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  durationMinutesGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'durationMinutes',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'durationMinutes',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      durationMinutesLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  durationMinutesLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'durationMinutes',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'durationMinutes',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      durationMinutesBetween(
+  durationMinutesBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'durationMinutes',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'durationMinutes',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition> idEqualTo(
-      Id value) {
+    Id value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
     });
   }
 
@@ -255,11 +262,13 @@ extension UnlockRecordQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -268,11 +277,13 @@ extension UnlockRecordQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -283,69 +294,70 @@ extension UnlockRecordQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      timestampEqualTo(int value) {
+  timestampEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'timestamp',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'timestamp', value: value),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      timestampGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  timestampGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'timestamp',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'timestamp',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      timestampLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  timestampLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'timestamp',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'timestamp',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterFilterCondition>
-      timestampBetween(
+  timestampBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'timestamp',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'timestamp',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -359,14 +371,14 @@ extension UnlockRecordQueryLinks
 extension UnlockRecordQuerySortBy
     on QueryBuilder<UnlockRecord, UnlockRecord, QSortBy> {
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterSortBy>
-      sortByDurationMinutes() {
+  sortByDurationMinutes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'durationMinutes', Sort.asc);
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterSortBy>
-      sortByDurationMinutesDesc() {
+  sortByDurationMinutesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'durationMinutes', Sort.desc);
     });
@@ -388,14 +400,14 @@ extension UnlockRecordQuerySortBy
 extension UnlockRecordQuerySortThenBy
     on QueryBuilder<UnlockRecord, UnlockRecord, QSortThenBy> {
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterSortBy>
-      thenByDurationMinutes() {
+  thenByDurationMinutes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'durationMinutes', Sort.asc);
     });
   }
 
   QueryBuilder<UnlockRecord, UnlockRecord, QAfterSortBy>
-      thenByDurationMinutesDesc() {
+  thenByDurationMinutesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'durationMinutes', Sort.desc);
     });
@@ -429,7 +441,7 @@ extension UnlockRecordQuerySortThenBy
 extension UnlockRecordQueryWhereDistinct
     on QueryBuilder<UnlockRecord, UnlockRecord, QDistinct> {
   QueryBuilder<UnlockRecord, UnlockRecord, QDistinct>
-      distinctByDurationMinutes() {
+  distinctByDurationMinutes() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'durationMinutes');
     });
